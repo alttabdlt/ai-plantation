@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { NavSidebar } from "@/components/nav-sidebar";
-import { StatusFooter } from "@/components/status-footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,11 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className="font-sans antialiased">
-        <NavSidebar />
-        <main className="ml-[220px] min-h-screen bg-background pb-8">
-          {children}
-        </main>
-        <StatusFooter />
+        {children}
       </body>
     </html>
   );

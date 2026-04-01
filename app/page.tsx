@@ -1,108 +1,82 @@
-import Link from "next/link";
-import { FlaskConical, MessageCircle, Bell } from "lucide-react";
-import { HealthRing } from "@/components/health-ring";
-import { FieldMap } from "@/components/field-map";
-import { AIBriefing } from "@/components/ai-briefing";
-import { QuickStats } from "@/components/quick-stats";
-import { LiveActivity } from "@/components/live-activity";
-import { WeatherStrip } from "@/components/weather-strip";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { ALERTS } from "@/lib/plantation-data";
+"use client";
 
-const criticalCount = ALERTS.filter(
-  (a) => a.type === "danger" || a.type === "warning"
-).length;
+import { useState, useCallback, useMemo, useEffect } from "react";
+import { IntelMap } from "@/components/map/IntelMap";
+import { FloatingNav } from "@/components/map/FloatingNav";
+import { LayerToggle } from "@/components/map/LayerToggle";
+import { TimeScrubber } from "@/components/map/TimeScrubber";
+import { SituationReport } from "@/components/map/SituationReport";
+import { EventDetailCard } from "@/components/map/EventDetailCard";
+import { MiniStatsBar } from "@/components/map/MiniStatsBar";
+import { INTEL_EVENTS, DEFAULT_LAYERS } from "@/lib/intel-events";
+import type { IntelEvent, LayerID } from "@/lib/intel-events";
 
-export default function DashboardPage() {
+function getInitialLayers(): LayerID[] {
+  if (typeof window === "undefined") return DEFAULT_LAYERS;
+  const params = new URLSearchParams(window.location.search);
+  const layersParam = params.get("layers");
+  if (layersParam) return layersParam.split(",") as LayerID[];
+  return DEFAULT_LAYERS;
+}
+
+function getInitialTimeRange(): string {
+  if (typeof window === "undefined") return "24h";
+  const params = new URLSearchParams(window.location.search);
+  return params.get("timeRange") || "24h";
+}
+
+export default function IntelligenceTheater() {
+  const [activeLayers, setActiveLayers] = useState<LayerID[]>(getInitialLayers);
+  const [timeRange, setTimeRange] = useState<string>(getInitialTimeRange);
+  const [selectedEvent, setSelectedEvent] = useState<IntelEvent | null>(null);
+
+  // Sync state to URL params
+  useEffect(() => {
+    const params = new URLSearchParams();
+    params.set("layers", activeLayers.join(","));
+    params.set("timeRange", timeRange);
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState(null, "", newUrl);
+  }, [activeLayers, timeRange]);
+
+  const toggleLayer = useCallback((layerId: string) => {
+    setActiveLayers((prev) => {
+      if (prev.includes(layerId as LayerID)) {
+        return prev.filter((l) => l !== layerId);
+      }
+      return [...prev, layerId as LayerID];
+    });
+  }, []);
+
+  // Filter events by active layers
+  const filteredEvents = useMemo(() => {
+    return INTEL_EVENTS.filter((e) => activeLayers.includes(e.layer));
+  }, [activeLayers]);
+
+  const onEventClick = useCallback((event: IntelEvent) => {
+    setSelectedEvent(event);
+  }, []);
+
+  const onCloseDetail = useCallback(() => {
+    setSelectedEvent(null);
+  }, []);
+
   return (
-    <div className="mx-auto max-w-[1200px] px-6 py-6 pb-12">
-      {/* Header */}
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold tracking-tight">Good morning</h1>
-          <p className="text-sm text-muted-foreground">
-            Here&apos;s your plantation at a glance.
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <Link href="/chat">
-            <Button variant="outline" size="sm">
-              <MessageCircle className="size-3.5" />
-              Ask AI
-            </Button>
-          </Link>
-          <Link href="/simulation">
-            <Button size="sm" className="glow-button">
-              <FlaskConical className="size-3.5" />
-              Run Simulation
-            </Button>
-          </Link>
-        </div>
-      </div>
+    <div className="relative h-screen w-screen overflow-hidden">
+      {/* Full-viewport map */}
+      <IntelMap
+        activeLayers={activeLayers}
+        events={filteredEvents}
+        onEventClick={onEventClick}
+      />
 
-      {/* 3-column grid */}
-      <div className="grid gap-5 lg:grid-cols-[260px_1fr_240px]">
-        {/* LEFT COLUMN — Health + Stats */}
-        <div className="space-y-4">
-          <div className="rounded-xl border border-border bg-card p-5">
-            <HealthRing />
-          </div>
-          <div className="rounded-xl border border-border bg-card p-4">
-            <QuickStats />
-          </div>
-          <div className="rounded-xl border border-border bg-card p-4">
-            <WeatherStrip />
-          </div>
-        </div>
-
-        {/* CENTER COLUMN — Map + Briefing */}
-        <div className="space-y-5">
-          <FieldMap />
-          <AIBriefing />
-        </div>
-
-        {/* RIGHT COLUMN — Activity + Alerts */}
-        <div className="space-y-4">
-          <div className="rounded-xl border border-border bg-card p-4">
-            <LiveActivity />
-          </div>
-
-          <div className="rounded-xl border border-border bg-card p-4">
-            <div className="mb-3 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Bell className="size-3.5 text-muted-foreground" />
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-muted-foreground">
-                  Alerts
-                </span>
-              </div>
-              <Badge variant="destructive" className="text-[10px]">
-                {criticalCount}
-              </Badge>
-            </div>
-            <div className="space-y-2">
-              {ALERTS.filter(
-                (a) => a.type === "danger" || a.type === "warning"
-              ).map((alert) => (
-                <div
-                  key={alert.id}
-                  className="rounded-lg border-l-2 border-l-red-500/40 bg-destructive/5 px-3 py-2"
-                >
-                  <p className="text-[11px] font-medium text-red-400">
-                    {alert.field}
-                  </p>
-                  <p className="text-[11px] text-muted-foreground">
-                    {alert.message}
-                  </p>
-                  <p className="mt-0.5 text-[9px] text-muted-foreground/40">
-                    {alert.time}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Floating overlays */}
+      <FloatingNav />
+      <LayerToggle activeLayers={activeLayers} onToggle={toggleLayer} />
+      <TimeScrubber activeRange={timeRange} onChange={setTimeRange} />
+      <SituationReport activeLayers={activeLayers} events={filteredEvents} />
+      <MiniStatsBar alertCount={filteredEvents.length} />
+      <EventDetailCard event={selectedEvent} onClose={onCloseDetail} />
     </div>
   );
 }
