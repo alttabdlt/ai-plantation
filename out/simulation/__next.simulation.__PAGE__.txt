@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+2:I[64074,["/ai-plantation/_next/static/chunks/06j5pzu_h_2-9.js","/ai-plantation/_next/static/chunks/0d3shmwh5_nmn.js","/ai-plantation/_next/static/chunks/0mrygax_2m132.js","/ai-plantation/_next/static/chunks/0xu_8uuubz21h.js"],"SimulationCard"]
+3:I[97367,["/ai-plantation/_next/static/chunks/06j5pzu_h_2-9.js","/ai-plantation/_next/static/chunks/0d3shmwh5_nmn.js","/ai-plantation/_next/static/chunks/0mrygax_2m132.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":[["$","div",null,{"className":"mx-auto max-w-5xl px-6 py-6 pb-12","children":[["$","div",null,{"className":"mb-6","children":[["$","h1",null,{"className":"text-2xl font-bold tracking-tight","children":"Simulation"}],["$","p",null,{"className":"text-sm text-muted-foreground","children":"AI analyzes your plantation data and recommends the best path to maximize yield. Run a simulation to see the projected outcome."}]]}],["$","$L2",null,{}]]}],[["$","script","script-0",{"src":"/ai-plantation/_next/static/chunks/0xu_8uuubz21h.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"zZix8yVkF2cJ-T--RgcBH"}
+5:null

@@ -1,0 +1,4 @@
+{"timestamp":"00:00:00.771","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:02:44.591","source":"Server","level":"ERROR","message":"Error: ENOENT: no such file or directory, scandir '/home/user/ai-plantation/app'"}
+{"timestamp":"00:02:44.600","source":"Server","level":"ERROR","message":"⨯ \"unhandledRejection:\" Error: ENOENT: no such file or directory, scandir '/home/user/ai-plantation/app'"}
+{"timestamp":"00:02:44.603","source":"Server","level":"ERROR","message":"⨯ \"unhandledRejection: \" Error: ENOENT: no such file or directory, scandir '/home/user/ai-plantation/app'"}

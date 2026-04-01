@@ -1,0 +1,61 @@
+[
+  {
+    "route": "/",
+    "firstLoadUncompressedJsBytes": 578429,
+    "firstLoadChunkPaths": [
+      ".next/static/chunks/06j5pzu_h_2-9.js",
+      ".next/static/chunks/0d3shmwh5_nmn.js",
+      ".next/static/chunks/0mrygax_2m132.js",
+      ".next/static/chunks/0vn9t8fuzyalk.js",
+      ".next/static/chunks/0bzupvr5gt3k9.js",
+      ".next/static/chunks/0pqt~8bl3ukh4.js",
+      ".next/static/chunks/16g.ca89g7fib.js",
+      ".next/static/chunks/0an67321f27.3.js",
+      ".next/static/chunks/turbopack-09.very6ah.pp.js"
+    ]
+  },
+  {
+    "route": "/simulation",
+    "firstLoadUncompressedJsBytes": 569927,
+    "firstLoadChunkPaths": [
+      ".next/static/chunks/06j5pzu_h_2-9.js",
+      ".next/static/chunks/0d3shmwh5_nmn.js",
+      ".next/static/chunks/0mrygax_2m132.js",
+      ".next/static/chunks/0xu_8uuubz21h.js",
+      ".next/static/chunks/0bzupvr5gt3k9.js",
+      ".next/static/chunks/0pqt~8bl3ukh4.js",
+      ".next/static/chunks/16g.ca89g7fib.js",
+      ".next/static/chunks/0an67321f27.3.js",
+      ".next/static/chunks/turbopack-09.very6ah.pp.js"
+    ]
+  },
+  {
+    "route": "/chat",
+    "firstLoadUncompressedJsBytes": 566863,
+    "firstLoadChunkPaths": [
+      ".next/static/chunks/06j5pzu_h_2-9.js",
+      ".next/static/chunks/0d3shmwh5_nmn.js",
+      ".next/static/chunks/0mrygax_2m132.js",
+      ".next/static/chunks/0h-un63_x5942.js",
+      ".next/static/chunks/0bzupvr5gt3k9.js",
+      ".next/static/chunks/0pqt~8bl3ukh4.js",
+      ".next/static/chunks/16g.ca89g7fib.js",
+      ".next/static/chunks/0an67321f27.3.js",
+      ".next/static/chunks/turbopack-09.very6ah.pp.js"
+    ]
+  },
+  {
+    "route": "/_not-found",
+    "firstLoadUncompressedJsBytes": 555980,
+    "firstLoadChunkPaths": [
+      ".next/static/chunks/06j5pzu_h_2-9.js",
+      ".next/static/chunks/0d3shmwh5_nmn.js",
+      ".next/static/chunks/0mrygax_2m132.js",
+      ".next/static/chunks/0bzupvr5gt3k9.js",
+      ".next/static/chunks/0pqt~8bl3ukh4.js",
+      ".next/static/chunks/16g.ca89g7fib.js",
+      ".next/static/chunks/0an67321f27.3.js",
+      ".next/static/chunks/turbopack-09.very6ah.pp.js"
+    ]
+  }
+]
